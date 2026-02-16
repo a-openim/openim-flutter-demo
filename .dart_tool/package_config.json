@@ -1977,21 +1977,21 @@
     },
     {
       "name": "wechat_assets_picker",
-      "rootUri": "file:///Users/ken/.pub-cache/hosted/pub.dev/wechat_assets_picker-9.5.0",
+      "rootUri": "file:///Users/ken/.pub-cache/hosted/pub.dev/wechat_assets_picker-10.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.6"
+    },
+    {
+      "name": "wechat_camera_picker",
+      "rootUri": "file:///Users/ken/.pub-cache/hosted/pub.dev/wechat_camera_picker-4.4.0",
       "packageUri": "lib/",
       "languageVersion": "3.4"
     },
     {
-      "name": "wechat_camera_picker",
-      "rootUri": "file:///Users/ken/.pub-cache/hosted/pub.dev/wechat_camera_picker-4.3.7",
-      "packageUri": "lib/",
-      "languageVersion": "3.2"
-    },
-    {
       "name": "wechat_picker_library",
-      "rootUri": "file:///Users/ken/.pub-cache/hosted/pub.dev/wechat_picker_library-1.0.5",
+      "rootUri": "file:///Users/ken/.pub-cache/hosted/pub.dev/wechat_picker_library-1.0.7",
       "packageUri": "lib/",
-      "languageVersion": "3.2"
+      "languageVersion": "3.4"
     },
     {
       "name": "win32",

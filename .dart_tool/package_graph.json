@@ -714,7 +714,7 @@
     },
     {
       "name": "wechat_camera_picker",
-      "version": "4.3.7",
+      "version": "4.4.0",
       "dependencies": [
         "camera",
         "camera_android",
@@ -731,10 +731,11 @@
     },
     {
       "name": "wechat_assets_picker",
-      "version": "9.5.0",
+      "version": "10.1.0",
       "dependencies": [
         "extended_image",
         "flutter",
+        "meta",
         "photo_manager",
         "photo_manager_image_provider",
         "provider",
@@ -2148,6 +2149,14 @@
       ]
     },
     {
+      "name": "wechat_picker_library",
+      "version": "1.0.7",
+      "dependencies": [
+        "flutter",
+        "photo_manager"
+      ]
+    },
+    {
       "name": "sensors_plus",
       "version": "6.1.1",
       "dependencies": [
@@ -2194,14 +2203,6 @@
         "camera_web",
         "flutter",
         "flutter_plugin_android_lifecycle"
-      ]
-    },
-    {
-      "name": "wechat_picker_library",
-      "version": "1.0.5",
-      "dependencies": [
-        "flutter",
-        "photo_manager"
       ]
     },
     {

@@ -49,8 +49,8 @@ dependencies:
   azlistview_plus: ^3.0.0
   lpinyin: ^2.0.3
   rxdart: ^0.27.7
-  wechat_assets_picker: ^9.3.1
-  wechat_camera_picker: ^4.3.2
+  wechat_assets_picker: ^10.1.0
+  wechat_camera_picker: ^4.4.0
   extended_image: ^8.2.0
   flutter_screenutil: ^5.7.0
   country_picker: ^2.0.20
