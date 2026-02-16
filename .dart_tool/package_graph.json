@@ -2149,14 +2149,6 @@
       ]
     },
     {
-      "name": "wechat_picker_library",
-      "version": "1.0.7",
-      "dependencies": [
-        "flutter",
-        "photo_manager"
-      ]
-    },
-    {
       "name": "sensors_plus",
       "version": "6.1.1",
       "dependencies": [
@@ -2203,6 +2195,14 @@
         "camera_web",
         "flutter",
         "flutter_plugin_android_lifecycle"
+      ]
+    },
+    {
+      "name": "wechat_picker_library",
+      "version": "1.0.7",
+      "dependencies": [
+        "flutter",
+        "photo_manager"
       ]
     },
     {

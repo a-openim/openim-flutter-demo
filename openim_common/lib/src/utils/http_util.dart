@@ -40,8 +40,7 @@ class HttpUtil {
     dio.options.receiveTimeout = const Duration(seconds: 30);
 
     // Configure SSL for macOS development - accept all certificates
-    (dio.httpClientAdapter as IOHttpClientAdapter).createHttpClient = () {
-      final client = HttpClient();
+    (dio.httpClientAdapter as IOHttpClientAdapter).onHttpClientCreate = (HttpClient client) {
       client.badCertificateCallback = (X509Certificate cert, String host, int port) => true;
       return client;
     };
