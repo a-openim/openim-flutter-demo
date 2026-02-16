@@ -63,7 +63,9 @@ class Config {
   static const friendScheme = "io.openim.app/addFriend/";
   static const groupScheme = "io.openim.app/joinGroup/";
 
-  static const _host = "your-server-ip or your-domain";
+  // static const _host = "your-server-ip or your-domain";
+  static const _host = "api-chat-openim.36x9.com";
+ 
 
   static const _ipRegex = '((2[0-4]\\d|25[0-5]|[01]?\\d\\d?)\\.){3}(2[0-4]\\d|25[0-5]|[01]?\\d\\d?)';
 
@@ -84,7 +86,7 @@ class Config {
     if (null != server) {
       url = server['chatTokenUrl'];
     }
-    return url ?? (_isIP ? "http://$_host:10009" : "https://$_host/chat");
+    return url ?? ("https://api-chat-openim.36x9.com");
   }
 
   static String get appAuthUrl {
@@ -93,7 +95,7 @@ class Config {
     if (null != server) {
       url = server['authUrl'];
     }
-    return url ?? (_isIP ? "http://$_host:10008" : "https://$_host/chat");
+    return url ?? ("https://api-chat-openim.36x9.com");
   }
 
   static String get imApiUrl {
@@ -102,7 +104,7 @@ class Config {
     if (null != server) {
       url = server['apiUrl'];
     }
-    return url ?? (_isIP ? 'http://$_host:10002' : "https://$_host/api");
+    return url ?? ("https://api-openim.36x9.com");
   }
 
   static String get imWsUrl {
@@ -111,7 +113,7 @@ class Config {
     if (null != server) {
       url = server['wsUrl'];
     }
-    return url ?? (_isIP ? "ws://$_host:10001" : "wss://$_host/msg_gateway");
+    return url ?? ("wss://msggateway-openim.36x9.com");
   }
 
   static int get logLevel {
