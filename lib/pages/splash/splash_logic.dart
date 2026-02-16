@@ -17,17 +17,37 @@ class SplashLogic extends GetxController {
   String? get token => DataSp.imToken;
 
   late StreamSubscription initializedSub;
+  Timer? _timeoutTimer;
+  bool _navigated = false;
 
   @override
   void onInit() {
+    Logger.print('SplashLogic onInit - userID: $userID, token: ${token != null ? "exists" : "null"}');
+    
+    // Add timeout to handle initialization failure
+    _timeoutTimer = Timer(const Duration(seconds: 15), () {
+      Logger.print('SplashLogic timeout - IM SDK may not have initialized');
+      _handleNavigation();
+    });
+    
     initializedSub = imLogic.initializedSubject.listen((value) {
-      if (null != userID && null != token) {
-        _login();
-      } else {
-        AppNavigator.startLogin();
-      }
+      Logger.print('SplashLogic initializedSubject received: $value');
+      _handleNavigation();
     });
     super.onInit();
+  }
+
+  void _handleNavigation() {
+    if (_navigated) return;
+    _navigated = true;
+    _timeoutTimer?.cancel();
+    initializedSub.cancel();
+    
+    if (null != userID && null != token) {
+      _login();
+    } else {
+      AppNavigator.startLogin();
+    }
   }
 
   _login() async {
@@ -55,6 +75,7 @@ class SplashLogic extends GetxController {
 
   @override
   void onClose() {
+    _timeoutTimer?.cancel();
     initializedSub.cancel();
     super.onClose();
   }

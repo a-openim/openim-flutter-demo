@@ -30,30 +30,36 @@ class IMController extends GetxController with IMCallback, OpenIMLive {
   }
 
   void initOpenIM() async {
-    final initialized = await OpenIM.iMManager.initSDK(
-      platformID: IMUtils.getPlatform(),
-      apiAddr: Config.imApiUrl,
-      wsAddr: Config.imWsUrl,
-      dataDir: Config.cachePath,
-      logLevel: Config.logLevel,
-      logFilePath: Config.cachePath,
-      listener: OnConnectListener(
-        onConnecting: () {
-          imSdkStatus(IMSdkStatus.connecting);
-        },
-        onConnectFailed: (code, error) {
-          imSdkStatus(IMSdkStatus.connectionFailed);
-        },
-        onConnectSuccess: () {
-          imSdkStatus(IMSdkStatus.connectionSucceeded);
-        },
-        onKickedOffline: kickedOffline,
-        onUserTokenExpired: kickedOffline,
-        onUserTokenInvalid: userTokenInvalid,
-      ),
-    );
+    Logger.print('initOpenIM starting... apiUrl: ${Config.imApiUrl}, wsUrl: ${Config.imWsUrl}');
+    try {
+      final initialized = await OpenIM.iMManager.initSDK(
+        platformID: IMUtils.getPlatform(),
+        apiAddr: Config.imApiUrl,
+        wsAddr: Config.imWsUrl,
+        dataDir: Config.cachePath,
+        logLevel: Config.logLevel,
+        logFilePath: Config.cachePath,
+        listener: OnConnectListener(
+          onConnecting: () {
+            Logger.print('IM SDK connecting...');
+            imSdkStatus(IMSdkStatus.connecting);
+          },
+          onConnectFailed: (code, error) {
+            Logger.print('IM SDK connect failed: code=$code, error=$error');
+            imSdkStatus(IMSdkStatus.connectionFailed);
+          },
+          onConnectSuccess: () {
+            Logger.print('IM SDK connect success!');
+            imSdkStatus(IMSdkStatus.connectionSucceeded);
+          },
+          onKickedOffline: kickedOffline,
+          onUserTokenExpired: kickedOffline,
+          onUserTokenInvalid: userTokenInvalid,
+        ),
+      );
+      Logger.print('initOpenIM completed, initialized: $initialized');
 
-    OpenIM.iMManager
+      OpenIM.iMManager
       ..setUploadLogsListener(OnUploadLogsListener(onUploadProgress: uploadLogsProgress))
       ..userManager.setUserListener(OnUserListener(
           onSelfInfoUpdated: (u) {
@@ -160,6 +166,10 @@ class IMController extends GetxController with IMCallback, OpenIMLive {
 
     Logger().sdkIsInited = initialized;
     initializedSubject.sink.add(initialized);
+    } catch (e, s) {
+      Logger.print('initOpenIM error: $e, stack: $s');
+      initializedSubject.sink.add(false);
+    }
   }
 
   Future login(String userID, String token) async {

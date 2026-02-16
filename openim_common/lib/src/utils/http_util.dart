@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:ui';
 
 import 'package:dio/dio.dart';
+import 'package:dio/io.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:image_gallery_saver_plus/image_gallery_saver_plus.dart';
@@ -37,6 +38,13 @@ class HttpUtil {
     dio.options.baseUrl = Config.imApiUrl;
     dio.options.connectTimeout = const Duration(seconds: 30); //30s
     dio.options.receiveTimeout = const Duration(seconds: 30);
+
+    // Configure SSL for macOS development - accept all certificates
+    (dio.httpClientAdapter as IOHttpClientAdapter).createHttpClient = () {
+      final client = HttpClient();
+      client.badCertificateCallback = (X509Certificate cert, String host, int port) => true;
+      return client;
+    };
   }
 
   static String get operationID => DateTime.now().millisecondsSinceEpoch.toString();
