@@ -680,13 +680,13 @@ packages:
     source: hosted
     version: "0.1.5"
   flutter_keyboard_visibility:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: flutter_keyboard_visibility
-      sha256: "4983655c26ab5b959252ee204c2fffa4afeb4413cd030455194ec0caa3b8e7cb"
+      sha256: "98664be7be0e3ffca00de50f7f6a287ab62c763fc8c762e0a21584584a3ff4f8"
       url: "https://pub.dev"
     source: hosted
-    version: "5.4.1"
+    version: "6.0.0"
   flutter_keyboard_visibility_linux:
     dependency: transitive
     description:
@@ -797,12 +797,11 @@ packages:
     source: hosted
     version: "1.1.1"
   flutter_openim_sdk:
-    dependency: "direct main"
+    dependency: "direct overridden"
     description:
-      name: flutter_openim_sdk
-      sha256: "09149d60b4c096acab52279365285409123f15f9111d5fc84cc2481b29343a04"
-      url: "https://pub.dev"
-    source: hosted
+      path: "local_packages/flutter_openim_sdk"
+      relative: true
+    source: path
     version: "3.8.3+3"
   flutter_picker_plus:
     dependency: transitive
@@ -1081,10 +1080,9 @@ packages:
   image_cropper:
     dependency: "direct main"
     description:
-      name: image_cropper
-      sha256: f4bad5ed2dfff5a7ce0dfbad545b46a945c702bb6182a921488ef01ba7693111
-      url: "https://pub.dev"
-    source: hosted
+      path: "local_packages/image_cropper"
+      relative: true
+    source: path
     version: "5.0.1"
   image_cropper_for_web:
     dependency: transitive
@@ -1361,10 +1359,9 @@ packages:
   map_launcher:
     dependency: "direct main"
     description:
-      name: map_launcher
-      sha256: cc94eff23dc35b56142bedc4f8553024454dfa8351508116888a418858d18ac0
-      url: "https://pub.dev"
-    source: hosted
+      path: "local_packages/map_launcher"
+      relative: true
+    source: path
     version: "3.1.0"
   matcher:
     dependency: transitive
@@ -1901,12 +1898,11 @@ packages:
     source: hosted
     version: "1.0.2"
   scan:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      name: scan
-      sha256: b343ec36f863a88d41eb4c174b810c055c6bd1f1822b2188ab31aab684fb7cdb
-      url: "https://pub.dev"
-    source: hosted
+      path: "local_packages/scan"
+      relative: true
+    source: path
     version: "1.6.0"
   screen_brightness:
     dependency: transitive
@@ -2092,10 +2088,9 @@ packages:
   sound_mode:
     dependency: "direct main"
     description:
-      name: sound_mode
-      sha256: ec25dc16feea1876e9c767b615ee1e430331da6c0d0f7122c04cbc2233b175cb
-      url: "https://pub.dev"
-    source: hosted
+      path: "local_packages/sound_mode"
+      relative: true
+    source: path
     version: "2.0.2"
   source_gen:
     dependency: transitive
@@ -2332,10 +2327,9 @@ packages:
   uri_to_file:
     dependency: "direct main"
     description:
-      name: uri_to_file
-      sha256: cbbb38f975d22311efacc9a53cdcb806708606666d8092314b81c5cb7983b700
-      url: "https://pub.dev"
-    source: hosted
+      path: "local_packages/uri_to_file"
+      relative: true
+    source: path
     version: "1.0.0"
   url_launcher:
     dependency: "direct main"
@@ -2444,10 +2438,9 @@ packages:
   vibration:
     dependency: "direct main"
     description:
-      name: vibration
-      sha256: "06588a845a4ebc73ab7ff7da555c2b3dbcd9676164b5856a38bf0b2287f1045d"
-      url: "https://pub.dev"
-    source: hosted
+      path: "local_packages/vibration"
+      relative: true
+    source: path
     version: "1.9.0"
   vibration_platform_interface:
     dependency: transitive

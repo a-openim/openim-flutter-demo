@@ -14,6 +14,7 @@ import '../im_callback.dart';
 class IMController extends GetxController with IMCallback, OpenIMLive {
   late Rx<UserFullInfo> userInfo;
   late String atAllTag;
+  bool _isIMSdkInitialized = false;
 
   @override
   void onClose() {
@@ -30,7 +31,8 @@ class IMController extends GetxController with IMCallback, OpenIMLive {
   }
 
   void initOpenIM() async {
-    Logger.print('initOpenIM starting... apiUrl: ${Config.imApiUrl}, wsUrl: ${Config.imWsUrl}');
+    print('========== INIT OPENIM START ==========');
+    print('initOpenIM starting... apiUrl: ${Config.imApiUrl}, wsUrl: ${Config.imWsUrl}');
     try {
       final initialized = await OpenIM.iMManager.initSDK(
         platformID: IMUtils.getPlatform(),
@@ -41,15 +43,15 @@ class IMController extends GetxController with IMCallback, OpenIMLive {
         logFilePath: Config.cachePath,
         listener: OnConnectListener(
           onConnecting: () {
-            Logger.print('IM SDK connecting...');
+            print('IM SDK connecting...');
             imSdkStatus(IMSdkStatus.connecting);
           },
           onConnectFailed: (code, error) {
-            Logger.print('IM SDK connect failed: code=$code, error=$error');
+            print('IM SDK connect failed: code=$code, error=$error');
             imSdkStatus(IMSdkStatus.connectionFailed);
           },
           onConnectSuccess: () {
-            Logger.print('IM SDK connect success!');
+            print('IM SDK connect success!');
             imSdkStatus(IMSdkStatus.connectionSucceeded);
           },
           onKickedOffline: kickedOffline,
@@ -57,7 +59,9 @@ class IMController extends GetxController with IMCallback, OpenIMLive {
           onUserTokenInvalid: userTokenInvalid,
         ),
       );
-      Logger.print('initOpenIM completed, initialized: $initialized');
+      print('initOpenIM completed, initialized: $initialized');
+      print('========== INIT OPENIM COMPLETE ==========');
+      _isIMSdkInitialized = true;
 
       OpenIM.iMManager
       ..setUploadLogsListener(OnUploadLogsListener(onUploadProgress: uploadLogsProgress))
@@ -173,20 +177,42 @@ class IMController extends GetxController with IMCallback, OpenIMLive {
   }
 
   Future login(String userID, String token) async {
+    // Wait for IM SDK to be initialized if not ready
+    int waitCount = 0;
+    while (!_isIMSdkInitialized && waitCount < 50) {
+      print('Waiting for IM SDK initialization... ($waitCount/50)');
+      await Future.delayed(const Duration(milliseconds: 100));
+      waitCount++;
+    }
+    
+    if (!_isIMSdkInitialized) {
+      print('WARNING: IM SDK not initialized, attempting login anyway');
+    }
+    
     try {
+      print('========== IM LOGIN START ==========');
+      print('IM login starting... userID: $userID');
+      print('Token: ${token.substring(0, 50)}...');
+      print('IM API URL: ${Config.imApiUrl}');
+      print('IM WS URL: ${Config.imWsUrl}');
+      
       var user = await OpenIM.iMManager.login(
         userID: userID,
         token: token,
         defaultValue: () async => UserInfo(userID: userID),
       );
+      
+      print('========== IM LOGIN SUCCESS ==========');
+      print('IM login successful, user: $user');
       userInfo = UserFullInfo.fromJson(user.toJson()).obs;
       _queryMyFullInfo();
       _queryAtAllTag();
     } catch (e, s) {
-      Logger.print('e: $e  s:$s');
+      print('========== IM LOGIN ERROR ==========');
+      print('IM login error: $e');
+      print('Stack trace: $s');
       await _handleLoginRepeatError(e);
-
-      return Future.error(e, s);
+      rethrow;
     }
   }
 

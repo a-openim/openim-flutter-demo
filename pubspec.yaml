@@ -101,13 +101,31 @@ dependencies:
     path: openim_common
   openim_live:
     path: openim_live
-  flutter_openim_sdk: 3.8.3+3
+
 
 dependency_overrides:
   scrollable_positioned_list: ^0.3.8
   flutter_background: ^1.3.0+1
   video_player_android: 2.7.1  # https://github.com/flutter/flutter/issues/81804
   flutter_webrtc: 0.12.10
+  flutter_keyboard_visibility: ^6.0.0
+  flutter_openim_sdk:
+    path: local_packages/flutter_openim_sdk
+  scan:
+    path: local_packages/scan
+
+
+  uri_to_file:
+    path: local_packages/uri_to_file
+  map_launcher:
+    path: local_packages/map_launcher
+  image_cropper:
+    path: local_packages/image_cropper
+  vibration:
+    path: local_packages/vibration
+  sound_mode:
+    path: local_packages/sound_mode
+
 
 dev_dependencies:
   flutter_test:

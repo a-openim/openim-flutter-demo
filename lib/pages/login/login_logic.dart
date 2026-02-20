@@ -146,6 +146,7 @@ class LoginLogic extends GetxController with GetTickerProviderStateMixin {
 
   Future<bool> _login() async {
     try {
+      Logger.print('========== HTTP LOGIN START ==========');
       if (loginType.value == LoginType.phone) {
         if (phone?.isNotEmpty == true && !IMUtils.isMobile(areaCode.value, phoneCtrl.text)) {
           IMViews.showToast(StrRes.plsEnterRightPhone);
@@ -164,6 +165,9 @@ class LoginLogic extends GetxController with GetTickerProviderStateMixin {
       }
       final password = IMUtils.emptyStrToNull(pwdCtrl.text);
       final code = IMUtils.emptyStrToNull(verificationCodeCtrl.text);
+      
+      Logger.print('Login params - areaCode: ${areaCode.value}, phone: $phone, account: ${this.account}, email: $email, isPasswordLogin: ${isPasswordLogin.value}');
+      
       final data = await Apis.login(
         areaCode: areaCode.value,
         phoneNumber: phone,
@@ -172,6 +176,10 @@ class LoginLogic extends GetxController with GetTickerProviderStateMixin {
         password: isPasswordLogin.value ? password : null,
         verificationCode: isPasswordLogin.value ? null : code,
       );
+      
+      Logger.print('========== HTTP LOGIN SUCCESS ==========');
+      Logger.print('HTTP login response - userID: ${data.userID}, imToken: ${data.imToken?.substring(0, 30)}..., chatToken: ${data.chatToken?.substring(0, 30)}...');
+      
       final account = {
         "areaCode": areaCode.value,
         "phoneNumber": phoneCtrl.text,
@@ -179,9 +187,12 @@ class LoginLogic extends GetxController with GetTickerProviderStateMixin {
       };
       await DataSp.putLoginCertificate(data);
       await DataSp.putLoginAccount(account);
-      Logger.print('login : ${data.userID}, token: ${data.imToken}');
+      Logger.print('Login certificate saved');
+      
+      Logger.print('========== CALLING IM LOGIN ==========');
       await imLogic.login(data.userID, data.imToken);
-      Logger.print('im login success');
+      Logger.print('========== IM LOGIN COMPLETE ==========');
+      
       PushController.login(
         data.userID,
         onTokenRefresh: (token) {
@@ -189,10 +200,24 @@ class LoginLogic extends GetxController with GetTickerProviderStateMixin {
               fcmToken: token, expireTime: DateTime.now().add(Duration(days: 90)).millisecondsSinceEpoch);
         },
       );
-      Logger.print('push login success');
+      Logger.print('Push login success');
       return true;
     } catch (e, s) {
-      Logger.print('login e: $e $s');
+      print('========== LOGIN ERROR ==========');
+      print('login e: $e');
+      print('Stack trace: $s');
+      String errorMsg = 'Login failed: $e';
+      if (e.toString().contains('SocketException') || e.toString().contains('network')) {
+        errorMsg = StrRes.networkError;
+      } else if (e.toString().contains('PlatformException')) {
+        // Extract error code from PlatformException
+        final RegExp exp = RegExp(r'code.*?(\d+)');
+        final match = exp.firstMatch(e.toString());
+        if (match != null) {
+          errorMsg = 'Login failed (${match.group(1)}). Please try again.';
+        }
+      }
+      IMViews.showToast(errorMsg);
     }
     return false;
   }

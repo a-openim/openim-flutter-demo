@@ -513,7 +513,7 @@
     },
     {
       "name": "flutter_keyboard_visibility",
-      "rootUri": "file:///Users/ken/.pub-cache/hosted/pub.dev/flutter_keyboard_visibility-5.4.1",
+      "rootUri": "file:///Users/ken/.pub-cache/hosted/pub.dev/flutter_keyboard_visibility-6.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -603,7 +603,7 @@
     },
     {
       "name": "flutter_openim_sdk",
-      "rootUri": "file:///Users/ken/.pub-cache/hosted/pub.dev/flutter_openim_sdk-3.8.3+3",
+      "rootUri": "../local_packages/flutter_openim_sdk",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -819,7 +819,7 @@
     },
     {
       "name": "image_cropper",
-      "rootUri": "file:///Users/ken/.pub-cache/hosted/pub.dev/image_cropper-5.0.1",
+      "rootUri": "../local_packages/image_cropper",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -1029,7 +1029,7 @@
     },
     {
       "name": "map_launcher",
-      "rootUri": "file:///Users/ken/.pub-cache/hosted/pub.dev/map_launcher-3.1.0",
+      "rootUri": "../local_packages/map_launcher",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
@@ -1437,7 +1437,7 @@
     },
     {
       "name": "scan",
-      "rootUri": "file:///Users/ken/.pub-cache/hosted/pub.dev/scan-1.6.0",
+      "rootUri": "../local_packages/scan",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -1581,7 +1581,7 @@
     },
     {
       "name": "sound_mode",
-      "rootUri": "file:///Users/ken/.pub-cache/hosted/pub.dev/sound_mode-2.0.2",
+      "rootUri": "../local_packages/sound_mode",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -1761,7 +1761,7 @@
     },
     {
       "name": "uri_to_file",
-      "rootUri": "file:///Users/ken/.pub-cache/hosted/pub.dev/uri_to_file-1.0.0",
+      "rootUri": "../local_packages/uri_to_file",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -1845,7 +1845,7 @@
     },
     {
       "name": "vibration",
-      "rootUri": "file:///Users/ken/.pub-cache/hosted/pub.dev/vibration-1.9.0",
+      "rootUri": "../local_packages/vibration",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
